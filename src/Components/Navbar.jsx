@@ -6,10 +6,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import logo from "../images/parallax-2.png"
+import { ShoppingCart } from '@mui/icons-material';
+import { Badge } from '@mui/material';
 
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className='nav' sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -21,10 +23,22 @@ export default function Navbar() {
           >
             <img src={logo} className='logo' alt="" />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            
-          </Typography>
-          <Button color="inherit">Login</Button>
+
+          <div className='grow'>
+            <Typography variant="h6" color="textPrimary" component="p">
+                Hola!
+            </Typography>
+            <div className="button">
+                <Button variant="outlined">
+                    <strong className='boton'>Iniciar sesión</strong>
+                </Button>
+                <IconButton>
+                    <Badge badgeContent={2} color='secondary'>
+                        <ShoppingCart fontSize='large'/>
+                    </Badge>
+                </IconButton>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
     </Box>

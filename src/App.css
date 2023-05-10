@@ -1,3 +1,27 @@
 .logo{
     width: 35px;
 }
+.button{
+    margin-left: 10px;
+    color: black;
+}
+.boton{
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(21, 26, 56);
+    padding: 5px;
+    border-radius: 5px;
+}
+.boton:hover{
+    opacity: .8;
+    color: white;
+    background: rgba(82, 82, 82, 0.048);
+}
+.grow{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-grow: 1;
+}
+.nav{
+    margin-bottom: 6rem;
+}
