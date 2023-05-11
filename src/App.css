@@ -25,3 +25,17 @@
 .nav{
     margin-bottom: 6rem;
 }
+.cardRating{
+    display: flex;
+    width: 100%;
+}
+.root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+.pagar{
+    margin-top: 20px !important;
+}
