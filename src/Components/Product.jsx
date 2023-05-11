@@ -6,11 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ClassNames } from '@emotion/react';
-import { AddShoppingCart, Description } from '@mui/icons-material';
+import { AddShoppingCart } from '@mui/icons-material';
 import accounting from 'accounting';
 
 const ExpandMore = styled((props) => {
