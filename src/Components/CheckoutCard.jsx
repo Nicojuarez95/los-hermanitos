@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import { ClassNames } from '@emotion/react';
 import accounting from 'accounting';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useStateValue } from '../stateProvider';
+import { actionTypes } from '../reducer';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,10 +29,18 @@ const ExampleComponent = () => {
 
 export default function CheckoutCart({product : {id, name, productType, image, price, rating, description}}) {
   const [expanded, setExpanded] = React.useState(false);
+  const [{basket}, dispatch] = useStateValue()
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+const removeItem = ()=>{
+  dispatch({
+    type: actionTypes.REMOVE_ITEM,
+    id
+  })
+}
 
   return (
     <Card sx={{ maxWidth: 320 }}>
@@ -65,7 +75,7 @@ export default function CheckoutCart({product : {id, name, productType, image, p
             ))}
         </div>
         
-        <IconButton>
+        <IconButton onClick={removeItem}>
             <DeleteIcon fontSize='large'/>
         </IconButton>
       </CardActions>
