@@ -43,7 +43,7 @@ const removeItem = ()=>{
 }
 
   return (
-    <Card sx={{ maxWidth: 320 }}>
+    <Card sx={{ maxWidth: 350 }} className='carta'>
       <CardHeader
         action={
           <Typography

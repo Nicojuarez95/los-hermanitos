@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Product from "./Product.jsx"
-// import products from "../product-data.js"
+import { Typography } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -66,10 +66,15 @@ const products = [
 export default function Products() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1} padding={1}>
+      <Grid item xs={12}>
+          <Typography align="center" gutterBottom variant='h4'>
+              Productos
+          </Typography>
+      </Grid>
+      <Grid container spacing={1} padding={0} >
         {
             products.map(product => (
-                <Grid item xs={6} sm={6} md={4} lg={3}>
+                <Grid item xs={6} sm={6} md={4} lg={3} >
                     <Product key={product.id} product={product}/>
                 </Grid>
             ))

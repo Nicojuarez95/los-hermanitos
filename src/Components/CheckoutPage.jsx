@@ -19,13 +19,13 @@ const CheckoutPage = () => {
 
     function FormRow() {
         return(
-            <React.Fragment>
+            <Grid container spacing={1} padding={0} >
                 {basket?.map((item) => (
-                    <Grid item xs={6} sm={10} md={6} lg={3} padding={1}>
+                    <Grid item xs={6} sm={10} md={6} lg={3}>
                         <CheckoutCard key={item.id} product={item}/>
                     </Grid>
                 ))}
-            </React.Fragment>
+            </Grid>
         )
     }
     return (
