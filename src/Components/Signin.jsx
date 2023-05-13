@@ -16,6 +16,7 @@ import { Link as Anchor} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useStateValue } from '../stateProvider.js';
 
 function Copyright(props) {
   return (
@@ -35,6 +36,7 @@ const theme = createTheme();
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [{user}, dispatch] = useStateValue()
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -55,6 +57,7 @@ export default function SignIn() {
         if (auth) {
           navigate('/');
           alert("Has iniciado sesión correctamente")
+          console.log(user)
         }
       })
       .catch((err) => alert(err.message));

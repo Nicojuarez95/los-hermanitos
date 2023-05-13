@@ -11,9 +11,28 @@ import { Badge } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../stateProvider';
 import { Link as Anchor} from 'react-router-dom';
+import { auth } from '../firebase';
+import { actionTypes } from '../reducer';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
-  const [{basket}, dispatch] = useStateValue()
+  const [{basket, user}, dispatch] = useStateValue()
+  const navigate = useNavigate();
+
+  const handleAuth = () =>{
+    if (user){
+      auth.signOut()
+      dispatch({
+        type: actionTypes.EMPTY_BASKET,
+        basket: []
+      });
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: null
+      });
+      navigate('/');
+    }
+  }
 
   return (
     <Box className='nav' sx={{ flexGrow: 1 }}>
@@ -33,12 +52,12 @@ export default function Navbar() {
 
           <div className='grow'>
             <Typography variant="h6" color="textPrimary" component="p">
-                Hola!
+            <p className='saludo'><span className='holas'>Hola</span> {user ? user.email : "!"}</p>
             </Typography>
             <div className="button">
               <Anchor to="/iniciarsesion">
-                <Button variant="outlined">
-                    <strong className='boton'>Iniciar sesión</strong>
+                <Button variant="outlined" onClick={handleAuth}>
+                    <strong className='boton'>{user ? "Cerrar sesión" : "Iniciar sesión"}</strong>
                 </Button>
               </Anchor>
                 <Link to="/carrito">
