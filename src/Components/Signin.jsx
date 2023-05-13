@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as Anchor} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 function Copyright(props) {
   return (
@@ -30,6 +33,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -37,6 +44,20 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+  };
+
+  const signin = (e) => {
+    e.preventDefault();
+    const authInstance = getAuth();
+    signInWithEmailAndPassword(authInstance, email, password)
+      .then((auth) => {
+        console.log(auth);
+        if (auth) {
+          navigate('/');
+          alert("Has iniciado sesión correctamente")
+        }
+      })
+      .catch((err) => alert(err.message));
   };
 
   return (
@@ -59,6 +80,8 @@ export default function SignIn() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              value={email}
+              onChange={e=>setEmail(e.target.value)}
               margin="normal"
               required
               fullWidth
@@ -69,6 +92,8 @@ export default function SignIn() {
               autoFocus
             />
             <TextField
+              value={password}
+              onChange={e=>setPassword(e.target.value)}
               margin="normal"
               required
               fullWidth
@@ -87,6 +112,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={signin}
             >
               Iniciar Sesión
             </Button>

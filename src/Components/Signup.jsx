@@ -10,7 +10,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as Anchor} from 'react-router-dom';
+import { Link as Anchor } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Copyright(props) {
   return (
@@ -28,6 +31,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -35,6 +42,20 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     });
+  };
+
+  const signup = (e) => {
+    e.preventDefault();
+    const authInstance = getAuth();
+    createUserWithEmailAndPassword(authInstance, email, password)
+      .then((auth) => {
+        console.log(auth);
+        if (auth) {
+          navigate('/');
+          alert("Te has registrado correctamente")
+        }
+      })
+      .catch((err) => alert(err.message));
   };
 
   return (
@@ -80,6 +101,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  value={email}
+                  onChange={e=>setEmail(e.target.value)}
                   required
                   fullWidth
                   id="email"
@@ -90,6 +113,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  value={password}
+                  onChange={e=>setPassword(e.target.value)}
                   required
                   fullWidth
                   name="password"
@@ -111,6 +136,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={signup}
             >
               Registrase
             </Button>
