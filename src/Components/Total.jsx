@@ -10,11 +10,15 @@ export default function Total() {
 
   return (
     <div className="root">
-        <h5> Total de productos: {basket?.length}</h5>
-        <h5> {accounting.formatMoney(getBasketTotal(basket), "$")}</h5>
-        <Anchord to="/pago">
-          <Button className='pagar' variant='contained' color='secondary'>Pagar</Button>
-        </Anchord>
+      <h5> Total de productos: {basket?.length}</h5>
+      <h5> {accounting.formatMoney(getBasketTotal(basket), "$")}</h5>
+        {getBasketTotal(basket) !== 0 ? (
+          <Anchord to="/pago">
+            <Button className='pagar' variant='contained' color='secondary'>Pagar</Button>
+          </Anchord>
+        ) : (
+          <Button className='pagar' variant='contained' color='secondary' disabled>Pagar</Button>
+        )}
     </div>
   )
 }
