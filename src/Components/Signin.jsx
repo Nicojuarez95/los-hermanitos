@@ -53,7 +53,6 @@ export default function SignIn() {
     const authInstance = getAuth();
     signInWithEmailAndPassword(authInstance, email, password)
       .then((auth) => {
-        console.log(auth);
         if (auth) {
           navigate('/');
           alert("Has iniciado sesión correctamente")
