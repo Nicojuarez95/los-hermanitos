@@ -74,7 +74,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registro
+            Register
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -85,7 +85,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="Nombre"
+                  label="Name"
                   autoFocus
                 />
               </Grid>
@@ -94,7 +94,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Apellido"
+                  label="Last name"
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -118,7 +118,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
-                  label="Contraseña"
+                  label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -138,12 +138,12 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2 }}
               onClick={signup}
             >
-              Registrase
+              Create acount
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Anchor to="/iniciarsesion" variant="body2">
-                  Ya tienes cuenta? Iniciá Sesión
+                Do you already have an account? Log in
                 </Anchor>
               </Grid>
             </Grid>
