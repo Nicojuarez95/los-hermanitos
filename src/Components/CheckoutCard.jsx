@@ -55,7 +55,7 @@ const removeItem = ()=>{
           </Typography>
         }
         title= {name}
-        subheader="En stock"
+        subheader="In stock"
       />
 
       <CardMedia
