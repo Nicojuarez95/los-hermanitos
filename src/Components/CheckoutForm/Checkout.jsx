@@ -6,6 +6,7 @@ export default function Checkout() {
       <>
         <main className=''>
           
+          
         </main>
       </>
     </div>
