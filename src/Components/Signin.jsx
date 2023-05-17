@@ -78,7 +78,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Iniciar Sesión
+            Log In
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -100,14 +100,15 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Contraseña"
+              label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Recuerdame"
+              label="
+              Remember me"
             />
             <Button
               type="submit"
@@ -116,7 +117,7 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
               onClick={signin}
             >
-              Iniciar Sesión
+              Log In
             </Button>
             <Grid container>
               {/* <Grid item xs>
@@ -126,7 +127,7 @@ export default function SignIn() {
               </Grid> */}
               <Grid item>
                 <Anchor to="/registro" variant="body2">
-                  {"No tienes cuenta? Registrate"}
+                  {"You do not have an account? Sign up"}
                 </Anchor>
               </Grid>
             </Grid>

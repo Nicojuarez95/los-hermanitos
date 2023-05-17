@@ -66,7 +66,7 @@ const addToBasket= () => {
           </Typography>
         }
         title= {name}
-        subheader="En stock"
+        subheader="In stock"
       />
 
       <CardMedia
