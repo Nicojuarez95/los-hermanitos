@@ -54,6 +54,7 @@ export default function Navbar() {
             <Typography variant="h6" color="textPrimary" component="p">
             <p className='saludo'><span className='holas'>Hi</span> {user ? user.email : "!"}</p>
             </Typography>
+            
             <div className="button">
               <Anchor to="/iniciarsesion">
                 <Button variant="outlined" onClick={handleAuth}>
