@@ -38,9 +38,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/carrito" element={<CheckoutPage />} />
-          <Route path="/iniciarsesion" element={<SignIn />} />
-          <Route path="/registro" element={<SignUp />} />
-          <Route path="/pago" element={<Checkout />} />
         </Routes>
       </div>
     </Router>

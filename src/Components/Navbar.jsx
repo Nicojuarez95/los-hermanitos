@@ -1,78 +1,73 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import logo from "../images/parallax-2.png"
-import { ShoppingCart } from '@mui/icons-material';
+import { Height, ShoppingCart } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../stateProvider';
-import { Link as Anchor} from 'react-router-dom';
-import { auth } from '../firebase';
-import { actionTypes } from '../reducer';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Menu as MenuIcon, Home as HomeIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import logoNav from "../images/Captura_de_pantalla_2023-06-06_153250-removebg-preview.png"
 
 export default function Navbar() {
-  const [{basket, user}, dispatch] = useStateValue()
-  const navigate = useNavigate();
+  const [{ basket }, dispatch] = useStateValue();
+  const [open, setOpen] = useState(false); // Estado para controlar la apertura y cierre del menú hamburguesa
 
-  const handleAuth = () =>{
-    if (user){
-      auth.signOut()
-      dispatch({
-        type: actionTypes.EMPTY_BASKET,
-        basket: []
-      });
-      dispatch({
-        type: actionTypes.SET_USER,
-        user: null
-      });
-      navigate('/');
-    }
-  }
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
 
   return (
-    <Box className='nav' sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+    <React.Fragment>
+      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(120, 120, 120, 0.9)' }}>
         <Toolbar>
-          <Link to="/">
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <img src={logo} className='logo' alt="" />
-            </IconButton>
+          {/* Botón para abrir el menú hamburguesa */}
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 4 }}
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }} className='nabvar'>
+            <img className='logo1' src={logoNav} alt="" />
           </Link>
 
-          <div className='grow'>
-            <Typography variant="h6" color="textPrimary" component="p">
-            <p className='saludo'><span className='holas'>Hi</span> {user ? user.email : "!"}</p>
-            </Typography>
-            
-            <div className="button">
-              <Anchor to="/iniciarsesion">
-                <Button variant="outlined" onClick={handleAuth}>
-                    <strong className='boton'>{user ? "Log Out" : "Log In"}</strong>
-                </Button>
-              </Anchor>
-                <Link to="/carrito">
-                  <IconButton>
-                      <Badge badgeContent={basket?.length} color='secondary'>
-                          <ShoppingCart fontSize='large'/>
-                      </Badge>
-                  </IconButton>
-                </Link>
-                
-            </div>
-          </div>
+          <div style={{ flexGrow: 1 }} />
+
+          {/* Ícono del carrito */}
+          <Link to="/carrito" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <IconButton style={{ color: 'white' }}>
+              <Badge badgeContent={basket?.length} color='primary'>
+                <ShoppingCart fontSize='large'/>
+              </Badge>
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
-    </Box>
+
+      {/* Menú hamburguesa */}
+      <Drawer anchor="left" open={open} onClose={handleDrawerToggle}>
+        <List style={{ backgroundColor:'#d34f4f', height:'100vh' }}>
+          {/* Ícono y enlace para la página de inicio */}
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <HomeIcon style={{ color:'white' }}/>
+            </ListItemIcon>
+            <ListItemText primary="INICIO" style={{ color:'white' }}/>
+          </ListItem>
+
+          {/* Ícono y enlace para el carrito */}
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <ShoppingCartIcon style={{ color:'white' }}/>
+            </ListItemIcon>
+            <ListItemText primary="PRODUCTOS" style={{ color:'white' }}/>
+          </ListItem>
+        </List>
+      </Drawer>
+    </React.Fragment>
   );
 }

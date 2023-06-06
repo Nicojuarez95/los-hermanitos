@@ -14,6 +14,8 @@ import { AddShoppingCart } from '@mui/icons-material';
 import accounting from 'accounting';
 import { actionTypes } from '../reducer';
 import { useStateValue } from '../stateProvider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,7 +32,7 @@ const ExampleComponent = () => {
   return <ExpandMore expand={true} />;
 };
 
-export default function Product({product : {id, name, productType, image, price, rating, description}}) {
+export default function Product({product : {id, name, quantity, productType, image, price, rating, description}}) {
   const [expanded, setExpanded] = React.useState(false);
   const [{basket}, dispatch] = useStateValue()
 
@@ -48,13 +50,20 @@ const addToBasket= () => {
       image,
       price,
       rating,
-      description
+      description,
+      quantity,
     }
   })
+  toast.success('El producto fue agregado al carrito de compras', {
+    autoClose: 800, // Duración de la notificación en milisegundos (en este caso, 2 segundos)
+  });
 }
 
+
   return (
-    <Card sx={{ maxWidth: 350 }}>
+    <>
+    <ToastContainer />
+    <Card sx={{ width: 340 }} style={{display:"flex", flexDirection:"column", justifyContent:"space-between" }}>
       <CardHeader
         action={
           <Typography
@@ -62,11 +71,11 @@ const addToBasket= () => {
           variant='h5'
           color='textSecondary'
           >
-            {accounting.formatMoney(price, "$")}
+            
           </Typography>
         }
         title= {name}
-        subheader="In stock"
+        
       />
 
       <CardMedia
@@ -76,10 +85,11 @@ const addToBasket= () => {
         alt="Adidas"
       />
 
-      <CardContent>
+      <CardContent style={{ display: "flex", justifyContent:"space-between" }}>
         <Typography variant="body2" color="textSecondary">
           {productType}
         </Typography>
+        {accounting.formatMoney(price, "$")}
       </CardContent>
 
       <CardActions disableSpacing>
@@ -87,11 +97,6 @@ const addToBasket= () => {
           <AddShoppingCart fontSize='large' />
         </IconButton>
 
-        {typeof rating === 'number' && rating >= 0 && Array(Math.floor(rating))
-          .fill()
-          .map((_, i) => (
-            <p key={i}>&#11088;</p>
-          ))}
 
         <ExpandMore
           expand={expanded}
@@ -109,5 +114,6 @@ const addToBasket= () => {
         </CardContent>
       </Collapse>
     </Card>
+    </>
   );
 }
